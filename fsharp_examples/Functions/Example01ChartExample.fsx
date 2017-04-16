@@ -1,4 +1,4 @@
-#load "../packages/FSharp.Charting/FSharp.Charting.fsx"
+#load "../../packages/FSharp.Charting/FSharp.Charting.fsx"
 
 open FSharp.Charting
 
