@@ -111,3 +111,50 @@ test pnote "#a"
 // Try a b sharp, (which does not exist)
 test pnote "#b"
 // Failure: Expecting: any char in 'acdfg'
+
+let poctave = anyOf "123" |>> (function
+                | '1' -> One
+                | '2' -> Two
+                | '3' -> Three
+                | unknown -> sprintf "Unknown octave %c" unknown |> failwith)
+// There are only 3 octaves: 1, 2 and 3.
+
+test poctave "2"
+// Success: Two
+
+let ptone = pipe2 pnote poctave (fun n o -> Tone(note = n, octave = o))
+// ptone: Combiner at higher liver to bind all parsers togehter.
+
+test ptone "#d3"
+// Success: Tone (DSharp, Three)
+
+let prest = stringReturn "-" Rest
+
+test prest "-"
+// Success: Rest
+test prest "b"
+// Failure: Expecting '-'
+
+let ptoken = pipe2 plength (prest <|> ptone) (fun l t -> {length = l; sound = t})
+// ptoken will return a Tone value. It is combined by 2 parsers: plenght & (prest <|> ptone)
+
+test ptoken aspiration
+// Success: {length = {fraction = Thirtyseconth; extended=false}; sound = Tone(DSharp, Three);}
+
+let pscore = sepBy ptoken (pstring " ")
+
+// pscore is the full composition, the final parser
+// This is a set of tokens, seperated by spaces.
+// the sepBy fparsec parser function is for parsing things that are seperated by something.
+// The first arugment is the parser for the things we want to parse (ptoken),
+// the second argument is a parser for the things that seperate them, in this case it is just a space.
+
+test plength "8."
+test pnote "b"
+test poctave "2"
+test prest "-"
+test ptone "#c2"
+test ptoken "16.-"
+test ptoken "32.#d3"
+test pscore "32.#d3 8a1 16-"
+test pscore "2- 16a1 16- 16a1 16- 8a1 16- 4a2 16g2 16- 2g2 16- 4- 8- 16g2 16- 16g2 16- 16g2 8g2 16- 4c2 16#a1 16- 4a2 8g2 4f2 4g2 8d2 8f2 16- 16f2 16- 16c2 8c2 16- 4a2 8g2 16f2 16- 8f2 16- 16c2 16- 4g2 4f2"
