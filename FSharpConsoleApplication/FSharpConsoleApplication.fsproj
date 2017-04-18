@@ -57,6 +57,9 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="NamespaceDemo.fs" />
+    <Compile Include="ModulesDemoA2.fs" />
+    <Compile Include="ModulesDemoB2.fs" />
+    <Compile Include="RequireQualifiedAccessDemo.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />
