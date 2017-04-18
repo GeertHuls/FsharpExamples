@@ -53,3 +53,61 @@ test plength aspiration
 // result: Success: {fraction = Thirtyseconth; extended = true;}
 test plength "asfsad"
 // result: Failure
+
+let psharp = (stringReturn "#" true) <|> (stringReturn "" false)
+
+// psharp, parses the # character, this is the same trick as we used for the dot.
+// This only returns a boolean.
+
+let psharpnote = pipe2 
+                    psharp 
+                    (anyOf "acdfg") 
+                    (fun isSharp note -> 
+                        match (isSharp, note) with
+                        | (false, 'a') -> A
+                        | (true, 'a') -> ASharp                    
+                        | (false, 'c') -> C
+                        | (true, 'c') -> CSharp
+                        | (false, 'd') -> D
+                        | (true, 'd') -> DSharp
+                        | (false, 'f') -> F
+                        | (true, 'f') -> FSharp
+                        | (false, 'g') -> G
+                        | (true, 'g') -> GSharp
+                        | (_,unknown) -> sprintf "Unknown note %c" unknown |> failwith)
+
+// pipe2, if psharpnote "#b" is invoked,
+// then pipe2 will first pass the character '#' to the psharp function
+// then will pass the 'b' character to the anyOf function.
+// Important: all charcharters are parsed one by one.
+
+let pnotsharpablenote = anyOf "be" |>> (function 
+                        | 'b' -> B
+                        | 'e' -> E
+                        | unknown -> sprintf "Unknown note %c" unknown |> failwith)
+
+// anyOf is fparsec parser function, this parser will parse any character in the string that we give it,
+// in this case 'be'.
+// |>>: this is the pipleline combinator, to apply a function to the result of the anyOf parser.
+// | 'b' --> these are function expression to
+// | 'e' --> match on the value. The first case is when the anyOf result is a 'b', and we will map
+//           that to a B. The 'e' will be mapped to an E.
+// | unknown --> to keep the compile happy, we'll also have to account for other cases.
+//               failwith is a fsharp function, which takes a string as first argument. It throws an exception.
+
+let pnote = pnotsharpablenote <|> psharpnote
+
+// pnote parser is simply the choice bewteen a not sharpable not and a sharpable note.
+
+//Test of pnote:
+// Test non-sharpable case:
+test pnote "b"
+// Success: B
+
+// Tet sharpable case:
+test pnote "#a"
+// Success: A
+
+// Try a b sharp, (which does not exist)
+test pnote "#b"
+// Failure: Expecting: any char in 'acdfg'
