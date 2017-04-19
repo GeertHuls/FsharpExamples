@@ -60,6 +60,8 @@
     <Compile Include="ModulesDemoA2.fs" />
     <Compile Include="ModulesDemoB2.fs" />
     <Compile Include="RequireQualifiedAccessDemo.fs" />
+    <Compile Include="AccessControlDemoA3.fs" />
+    <Compile Include="AccessControlDemoB3.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />
