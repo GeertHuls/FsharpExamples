@@ -55,8 +55,15 @@
     <None Include="any\netstandard1.6\FSharp.Core.sigdata" />
     <None Include="any\netstandard1.6\FSharp.Core.optdata" />
     <Compile Include="WavePackerTests.fs" />
+    <Compile Include="ParsingTests.fs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FParsec">
+      <HintPath>..\packages\FParsec.1.0.2\lib\net40-client\FParsec.dll</HintPath>
+    </Reference>
+    <Reference Include="FParsecCS">
+      <HintPath>..\packages\FParsec.1.0.2\lib\net40-client\FParsecCS.dll</HintPath>
+    </Reference>
     <Reference Include="FSharp.Core">
       <HintPath>..\packages\FSharp.Core.4.1.12\lib\net45\FSharp.Core.dll</HintPath>
     </Reference>
