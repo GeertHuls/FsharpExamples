@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Composer", "Composer", "{96
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Composer", "Composer\Composer.fsproj", "{56123F16-3004-4096-B76C-5F58ADF977DF}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tests", "Tests\Tests.fsproj", "{40B0FEC9-00EC-44A8-AF28-A6FE14D0F965}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,11 +31,16 @@ Global
 		{56123F16-3004-4096-B76C-5F58ADF977DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56123F16-3004-4096-B76C-5F58ADF977DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56123F16-3004-4096-B76C-5F58ADF977DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40B0FEC9-00EC-44A8-AF28-A6FE14D0F965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40B0FEC9-00EC-44A8-AF28-A6FE14D0F965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40B0FEC9-00EC-44A8-AF28-A6FE14D0F965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40B0FEC9-00EC-44A8-AF28-A6FE14D0F965}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{56123F16-3004-4096-B76C-5F58ADF977DF} = {965EC1A0-EFBF-42A3-BDE3-458170ED8781}
+		{40B0FEC9-00EC-44A8-AF28-A6FE14D0F965} = {965EC1A0-EFBF-42A3-BDE3-458170ED8781}
 	EndGlobalSection
 EndGlobal
