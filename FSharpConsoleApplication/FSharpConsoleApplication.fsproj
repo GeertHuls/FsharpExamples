@@ -66,6 +66,7 @@
     <Compile Include="PatternMatching.fs" />
     <Compile Include="CSharpInterop.fs" />
     <Compile Include="DisposableComponents.fs" />
+    <Compile Include="PropertyTesting.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />
