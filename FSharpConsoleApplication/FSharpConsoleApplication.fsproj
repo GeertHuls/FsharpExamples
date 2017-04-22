@@ -64,6 +64,7 @@
     <Compile Include="AccessControlDemoB3.fs" />
     <Compile Include="Exceptions.fs" />
     <Compile Include="PatternMatching.fs" />
+    <Compile Include="CSharpInterop.fs" />
     <Compile Include="DisposableComponents.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
