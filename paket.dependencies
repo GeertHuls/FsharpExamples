@@ -3,3 +3,4 @@ nuget FAKE
 nuget Fparsec
 nuget FSharp.Charting
 nuget FSharp.Core
+nuget fsharp.data
