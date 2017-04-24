@@ -60,3 +60,36 @@ let parse score =
         | Success(result, _, _)   -> Choice2Of2 result
         | Failure(errorMsg, _, _) -> Choice1Of2 errorMsg
 
+let durationFromToken token = 
+    let bpm = 120.
+    let secondsPerBeat = 60./bpm
+    (match token.length.fraction with
+        | Full -> 4.*1000.*secondsPerBeat
+        | Half -> 2.*1000.*secondsPerBeat
+        | Quarter -> 1.*1000.*secondsPerBeat
+        | Eighth -> 1./2.*1000.*secondsPerBeat
+        | Sixteenth -> 1./4.*1000.*secondsPerBeat
+        | Thirtyseconth -> (1./8.)*1000.*secondsPerBeat) *
+            (if token.length.extended then 1.5 else 1.0)
+
+let octaveNumeric octave = 
+    match octave with
+        | One -> 1
+        | Two -> 2
+        | Three -> 3
+
+let semitonesBetween lower upper = 
+    let noteSequence = [A;ASharp;B;C;CSharp;D;DSharp;E;F;FSharp;G;GSharp]
+    let overAllIndex (note,octave) = 
+        let noteIndex = List.findIndex (fun n -> n=note) noteSequence
+        noteIndex + ((octaveNumeric octave - 1) * 12)
+    (overAllIndex upper) - (overAllIndex lower)    
+
+let frequency sound = 
+    match sound with
+        | Rest -> 0.
+        | Tone (note,octave) ->
+            let gap = semitonesBetween (A,One) (note,octave)
+            // following formula is from http://www.phy.mtu.edu/~suits/NoteFreqCalcs.html
+            220. * ((2. ** (1./12.)) ** (float gap)) 
+

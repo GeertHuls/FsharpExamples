@@ -54,6 +54,7 @@
     <Compile Include="SignalGenerator.fs" />
     <Compile Include="WavePacker.fs" />
     <Content Include="packages.config" />
+    <Compile Include="Assembler.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FParsec">
