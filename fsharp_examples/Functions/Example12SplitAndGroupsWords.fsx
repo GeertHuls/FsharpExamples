@@ -24,3 +24,11 @@ let tempRes4 = groupStrings  ["A"; "With"; "String"; "Some"] "Short"
 
 
 let finalResults = groupedStrings |> List.rev
+
+
+// using split as infix operator
+// http://usingprogramming.com/post/2017/08/25/getting-started-with-programming-and-getting-absolutely-nowhere-part-3
+
+/// Splits a string into an array on the specified char.
+let (<|>) (s:string) (c:char) = s |> split c
+let parts2 = "Some String With A Short Word" <|> ' '
