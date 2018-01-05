@@ -69,11 +69,17 @@ let letterVal (c : char) =
     | _ -> None
 
 let sub x y = y - x
+
+let baseValue b i =
+    System.Math.Pow(b, i)
+
 let colNum =
+    let elementVal i x = i |> float |> baseValue 26. |> (*) x
     explode
     >> Array.choose letterVal
     >> Array.rev
-    >> Array.mapi (fun i x -> (float x) * System.Math.Pow(26., i |> float))
+    >> Array.map float
+    >> Array.mapi elementVal
     >> Array.sum
     >> int
     >> sub 1
