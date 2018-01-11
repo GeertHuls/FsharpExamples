@@ -111,3 +111,14 @@ let testC =
 let colNum2 =
     explode
     >> Array.choose letterVal
+
+
+// https://fsharpforfunandprofit.com/posts/function-signatures/
+let flatten<'a> : 'a array array -> 'a array = Array.collect id
+let doubleArr = [|[|1|]|]
+let flat = flatten doubleArr
+
+
+let listCount<'a> : 'a list -> int = List.length
+let counted = [1;2;3;10;15] |> listCount
+
