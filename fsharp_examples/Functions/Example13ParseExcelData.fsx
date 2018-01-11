@@ -90,3 +90,24 @@ colNum "AB" // Correct: 27
 
 // Applied to an entire array:
 ["A"; "Z"; "AA"; "AB"; "ZZ"; "AAA"] |> List.map colNum //  [0; 25; 26; 27; 701; 702]
+
+
+let testF inpt = 
+    match inpt with
+    | 1 -> None
+    | _ -> Some inpt
+
+let testM i x = i * x
+
+let testC =
+ Array.choose testF
+ >> Array.mapi (fun i x -> (float x) * System.Math.Pow(26., i |> float))
+
+[|1;2;3;4|] |> testC
+
+// letterVal 'B'
+// System.Math.Pow(26., 2 |> float)
+
+let colNum2 =
+    explode
+    >> Array.choose letterVal
