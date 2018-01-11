@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fsharp_examples", "fsharp_examples\fsharp_examples.fsproj", "{6260F8F3-B9C5-47A0-AE2E-21A61DF2C6A3}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Composer", "Composer\Composer.fsproj", "{56123F16-3004-4096-B76C-5F58ADF977DF}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tests", "Tests\Tests.fsproj", "{40B0FEC9-00EC-44A8-AF28-A6FE14D0F965}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "SpreadsheetReader", "SpreadsheetReader\SpreadsheetReader.fsproj", "{868980BA-1967-407D-8367-80799F70662F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{40B0FEC9-00EC-44A8-AF28-A6FE14D0F965}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40B0FEC9-00EC-44A8-AF28-A6FE14D0F965}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40B0FEC9-00EC-44A8-AF28-A6FE14D0F965}.Release|Any CPU.Build.0 = Release|Any CPU
+		{868980BA-1967-407D-8367-80799F70662F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{868980BA-1967-407D-8367-80799F70662F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{868980BA-1967-407D-8367-80799F70662F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{868980BA-1967-407D-8367-80799F70662F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,5 +48,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{56123F16-3004-4096-B76C-5F58ADF977DF} = {965EC1A0-EFBF-42A3-BDE3-458170ED8781}
 		{40B0FEC9-00EC-44A8-AF28-A6FE14D0F965} = {965EC1A0-EFBF-42A3-BDE3-458170ED8781}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {893B855B-BC0E-4465-9CAB-B6D1487ADF62}
 	EndGlobalSection
 EndGlobal
