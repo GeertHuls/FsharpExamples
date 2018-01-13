@@ -1,3 +1,16 @@
+
+open System
+open System.IO
+
+[<LiteralAttribute>]
+let TargetDir = @"C:\Project1\bin\Debug"
+
+Directory.GetFiles(TargetDir, "*.dll")
+|> Seq.append (Directory.GetFiles(TargetDir, "*.exe"))
+|> Seq.append (Directory.GetFiles(TargetDir, "*.config"))
+|> Seq.map Path.GetFileName
+|> Seq.toList
+
 sin 7. //the sin function expects a floating point argument, hence the trailing dot
 // val it : float = 0.6569865987
 
