@@ -14,3 +14,28 @@ let doesListContainsTheNumber4 l =
 
 let listContainsTheNumber4 = doesListContainsTheNumber4 intList
 
+
+type ListPerson = {
+    FirstName : string
+    MiddleName : string option
+    LastName : string
+    Email : string
+    MagicId : string
+}
+
+let compare (m1 : ListPerson) (m2 : ListPerson) =
+    // Compare mandatory values first
+    m1.FirstName = m2.FirstName &&
+    m1.LastName = m2.LastName &&
+    m1.Email = m2.Email &&
+    m1.MagicId = m2.MagicId &&
+    // Default the match to `true` if either is `None` so that the previous conditions are the only influence
+    match m1.MiddleName, m2.MiddleName with
+    | Some a, Some b -> a = b
+    | _ -> true
+
+let compareCurry = compare { FirstName="fn"; LastName="ln"; MiddleName=None; Email="em"; MagicId="mid" }
+
+let listCompare other el =
+    other |> List.filter (compare el) |> List.length = 0
+
