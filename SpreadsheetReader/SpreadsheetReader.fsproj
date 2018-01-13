@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Excel.fs" />
-  </ItemGroup>
+		<Compile Include="Object.fs" />
+		<Compile Include="String.fs" />
+	  <Compile Include="Array.fs" />
+		<Compile Include="Excel.fs" />
+	</ItemGroup>
 
 </Project>

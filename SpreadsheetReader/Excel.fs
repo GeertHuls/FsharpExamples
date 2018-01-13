@@ -1,7 +1,6 @@
-module Excel
+namespace SpreadsheetReader
 
-  let explode (s:string) =
-      [|for c in s -> c|]
+module Excel =
 
   let letterVal (c : char) =
     let f (c : char) v = 1 + v - int c
@@ -18,11 +17,12 @@ module Excel
 
   let colNum =
     let elementVal i x = i |> float |> baseValue 26. |> (*) x
-    explode
+    String.explode
     >> Array.choose letterVal
     >> Array.rev
     >> Array.map float
     >> Array.mapi elementVal
     >> Array.sum
     >> int
-    >> sub 1
+ 
+  let colNumZBase = colNum >> sub 1
