@@ -39,3 +39,21 @@ let compareCurry = compare { FirstName="fn"; LastName="ln"; MiddleName=None; Ema
 let listCompare other el =
     other |> List.filter (compare el) |> List.length = 0
 
+// Generic version - takes a predicate as extra parameter:
+let listCompare2 (other: 'a list) (pred: 'a -> 'a -> bool) (el: 'a) =
+    other |> List.filter (pred el) |> List.length = 0
+
+// We distinct on every list person's property but the middlename:
+let distinctPerson = List.distinctBy (fun u -> { u with MiddleName = None })
+
+printfn "Getting members not on old list."
+let newListUnique newListMembers oldListMembers =
+    newListMembers
+    |> List.filter (listCompare oldListMembers)
+    |> distinctPerson
+
+printfn "Getting members not on new list."
+let oldListUnique newListMembers oldListMembers =
+    oldListMembers
+    |> List.filter (listCompare newListMembers)
+    |> distinctPerson
