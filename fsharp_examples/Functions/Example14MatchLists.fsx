@@ -45,15 +45,14 @@ let listCompare2 (other: 'a list) (pred: 'a -> 'a -> bool) (el: 'a) =
 
 // We distinct on every list person's property but the middlename:
 let distinctPerson = List.distinctBy (fun u -> { u with MiddleName = None })
+let filterBy other = List.filter (listCompare other) >> distinctPerson
 
 printfn "Getting members not on old list."
 let newListUnique newListMembers oldListMembers =
     newListMembers
-    |> List.filter (listCompare oldListMembers)
-    |> distinctPerson
+    |> filterBy oldListMembers
 
 printfn "Getting members not on new list."
 let oldListUnique newListMembers oldListMembers =
-    oldListMembers
-    |> List.filter (listCompare newListMembers)
-    |> distinctPerson
+    newListMembers
+    |> filterBy oldListMembers
