@@ -43,6 +43,17 @@ let listCompare other el =
 let listCompare2 (other: 'a list) (pred: 'a -> 'a -> bool) (el: 'a) =
     other |> List.filter (pred el) |> List.length = 0
 
+
+// Example of map function with record types:
+let changePerson u: ListPerson = {
+    u with MiddleName = Some "blah";
+        FirstName = "Change firstName"
+}
+
+// Here the changed person keeps the properties of its original except for the first and middle name
+let changedPerson = changePerson { FirstName="fn"; LastName="ln"; MiddleName= Some "some name"; Email="em"; MagicId="mid" }
+
+
 // We distinct on every list person's property but the middlename:
 let distinctPerson = List.distinctBy (fun u -> { u with MiddleName = None })
 let filterBy other = List.filter (listCompare other) >> distinctPerson
