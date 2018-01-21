@@ -1,27 +1,31 @@
-open NPOI.SS.UserModel
-open System
+
+#r @"..\..\packages\SharpZipLib\lib\20\ICSharpCode.SharpZipLib.dll"
 #r @"..\..\packages\NPOI\lib\net40\NPOI.dll"
 #r @"..\..\packages\NPOI\lib\net40\NPOI.OOXML.dll"
 #r @"..\..\packages\NPOI\lib\net40\NPOI.OpenXml4Net.dll"
 
+open System
 open System.IO
 open NPOI.XSSF.UserModel
+open NPOI.SS.UserModel
+
 // http://usingprogramming.com/post/2017/08/30/getting-started-with-programming-and-getting-absolutely-nowhere-part-5
 
-let intList = [1;2;3;4]
+System.IO.Directory.SetCurrentDirectory (__SOURCE_DIRECTORY__)
+
+// let intList = [1;2;3;4]
 
 // a function that check wheter list.length is equal to 0:
-let isListEmpty l = l |> List.length = 0
-let emptyResult = isListEmpty intList
+// let isListEmpty l = l |> List.length = 0
+// let emptyResult = isListEmpty intList
 
 // a function that checks wheter the number 4 is included in the list
-let doesListContainsTheNumber4 l =
-    l
-    |> List.filter (fun i -> i = 4)
-    |> List.length > 0
+// let doesListContainsTheNumber4 l =
+//     l
+//     |> List.filter (fun i -> i = 4)
+//     |> List.length > 0
 
-let listContainsTheNumber4 = doesListContainsTheNumber4 intList
-
+// let listContainsTheNumber4 = doesListContainsTheNumber4 intList
 
 type ListPerson = {
     FirstName : string
@@ -42,29 +46,30 @@ let compare (m1 : ListPerson) (m2 : ListPerson) =
     | Some a, Some b -> a = b
     | _ -> true
 
-let compareCurry = compare { FirstName="fn"; LastName="ln"; MiddleName=None; Email="em"; MagicId="mid" }
+// let compareCurry = compare { FirstName="fn"; LastName="ln"; MiddleName=None; Email="em"; MagicId="mid" }
 
 let listCompare other el =
     other |> List.filter (compare el) |> List.length = 0
 
 // Generic version - takes a predicate as extra parameter:
-let listCompare2 (other: 'a list) (pred: 'a -> 'a -> bool) (el: 'a) =
-    other |> List.filter (pred el) |> List.length = 0
+// let listCompare2 (other: 'a list) (pred: 'a -> 'a -> bool) (el: 'a) =
+//     other |> List.filter (pred el) |> List.length = 0
 
 
 // Example of map function with record types:
-let changePerson u: ListPerson = {
-    u with MiddleName = Some "blah";
-        FirstName = "Change firstName"
-}
+// let changePerson u: ListPerson = {
+//     u with MiddleName = Some "blah";
+//         FirstName = "Change firstName"
+// }
 
 // Here the changed person keeps the properties of its original except for the first and middle name
-let changedPerson = changePerson { FirstName="fn"; LastName="ln"; MiddleName= Some "some name"; Email="em"; MagicId="mid" }
+// let changedPerson = changePerson { FirstName="fn"; LastName="ln"; MiddleName= Some "some name"; Email="em"; MagicId="mid" }
 
 
 // We distinct on every list person's property but the middlename:
 let distinctPerson = List.distinctBy (fun u -> { u with MiddleName = None })
 let filterBy other = List.filter (listCompare other) >> distinctPerson
+
 
 let newBookFilename = @"..\..\SpreadsheetReader\spreadsheets\Step3_Testing_New.xlsx"
 let newBook =
@@ -99,7 +104,6 @@ let getVal (cell : ICell) : string option =
         cell.CellType
         |> (function | CellType.Boolean -> cell.BooleanCellValue |> toStr | CellType.Numeric -> cell.NumericCellValue |> toStr | _ -> cell.StringCellValue))
 
-
 // We use the options to tell us if we have a valid spec or not, when matched with Seq.choose it will filter away all the None values.
 let getSpecMember (row : IRow) =
     let get = row.GetCell >> getVal
@@ -120,12 +124,11 @@ let oldListMembers =
     |> Seq.choose getSpecMember
     |> Seq.toList
 
-
 printfn "Getting members not on old list."
 let newListUnique = newListMembers |> filterBy oldListMembers
 
 printfn "Getting members not on new list."
-let oldListUnique = newListMembers |> filterBy oldListMembers
+let oldListUnique = oldListMembers |> filterBy newListMembers
 
 let fillRow el (row : IRow) =
     0 |> row.CreateCell |> setValue el.FirstName
