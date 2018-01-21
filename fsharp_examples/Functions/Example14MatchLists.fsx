@@ -48,13 +48,14 @@ let compare (m1 : ListPerson) (m2 : ListPerson) =
 
 // let compareCurry = compare { FirstName="fn"; LastName="ln"; MiddleName=None; Email="em"; MagicId="mid" }
 
-let listCompare other el =
-    other |> List.filter (compare el) |> List.length = 0
+
+// Old version, non-generic listCompare
+// let listCompare other el =
+//     other |> List.filter (compare el) |> List.length = 0
 
 // Generic version - takes a predicate as extra parameter:
-// let listCompare2 (other: 'a list) (pred: 'a -> 'a -> bool) (el: 'a) =
-//     other |> List.filter (pred el) |> List.length = 0
-
+let listCompare other pred el =
+    other |> List.filter (pred el) |> List.length = 0
 
 // Example of map function with record types:
 // let changePerson u: ListPerson = {
@@ -65,11 +66,9 @@ let listCompare other el =
 // Here the changed person keeps the properties of its original except for the first and middle name
 // let changedPerson = changePerson { FirstName="fn"; LastName="ln"; MiddleName= Some "some name"; Email="em"; MagicId="mid" }
 
-
 // We distinct on every list person's property but the middlename:
 let distinctPerson = List.distinctBy (fun u -> { u with MiddleName = None })
-let filterBy other = List.filter (listCompare other) >> distinctPerson
-
+let filterBy other = List.filter (listCompare other compare) >> distinctPerson
 
 let newBookFilename = @"..\..\SpreadsheetReader\spreadsheets\Step3_Testing_New.xlsx"
 let newBook =
