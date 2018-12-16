@@ -10,6 +10,8 @@
 	  <Compile Include="Array.fs" />
 		<Compile Include="Excel.fs" />
 	  <Compile Include="Model.fs" />
+	  <Compile Include="Merger.fs" />
+	  <Compile Include="Program.fs" />
 	</ItemGroup>
 
   <ItemGroup>
