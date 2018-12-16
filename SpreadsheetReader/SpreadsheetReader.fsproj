@@ -9,6 +9,11 @@
 		<Compile Include="String.fs" />
 	  <Compile Include="Array.fs" />
 		<Compile Include="Excel.fs" />
+	  <Compile Include="Model.fs" />
 	</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NPOI" Version="2.3.0" />
+  </ItemGroup>
 
 </Project>

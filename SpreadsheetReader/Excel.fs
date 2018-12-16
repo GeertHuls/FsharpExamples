@@ -1,5 +1,9 @@
 namespace SpreadsheetReader
 
+open Object
+open NPOI.SS.UserModel
+
+// Based on ../fsharp_examples/functions/Example14MatchLists.fsx
 module Excel =
 
   let letterVal (c : char) =
@@ -26,3 +30,19 @@ module Excel =
     >> int
  
   let colNumZBase = colNum >> sub 1
+
+
+  let setValue (s : string) (cell:ICell) =
+    s |> cell.SetCellValue
+
+  let setValueOpt (s : string option) (cell:ICell) =
+      s |> Option.map (fun s -> cell |> setValue s) |> ignore
+
+  let getVal (cell : ICell) : string option = 
+      cell
+      |> Option.ofObj
+      |> Option.map (fun cell ->
+          cell.CellType
+          |> (function | CellType.Boolean -> cell.BooleanCellValue |> toStr | CellType.Numeric -> cell.NumericCellValue |> toStr | _ -> cell.StringCellValue))
+
+

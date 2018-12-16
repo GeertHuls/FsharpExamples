@@ -67,8 +67,13 @@ let listCompare other pred el =
 // let changedPerson = changePerson { FirstName="fn"; LastName="ln"; MiddleName= Some "some name"; Email="em"; MagicId="mid" }
 
 // We distinct on every list person's property but the middlename:
+
 let distinctPerson = List.distinctBy (fun u -> { u with MiddleName = None })
 let filterBy other = List.filter (listCompare other compare) >> distinctPerson
+
+// (listCompare other compare) is curried, only needs 1 more param which is el to get to el -> bool predicate
+// the function below is also curried!
+// let testCurried other = listCompare other compare
 
 let newBookFilename = @"..\..\SpreadsheetReader\spreadsheets\Step3_Testing_New.xlsx"
 let newBook =

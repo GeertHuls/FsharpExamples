@@ -4,3 +4,6 @@ nuget Fparsec
 nuget FSharp.Charting
 nuget FSharp.Core
 nuget fsharp.data
+nuget NETStandard.Library.NETFramework
+nuget NPOI
+nuget SQLProvider
